@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>DRAG And DROP FILE VUE JS, BOOTSTRAP, FONTAWESOME</title>
+    <style>
+        .darg-drop-file-input {
+            display:block !important;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            border: 2px dashed #ff0000;
+            padding: 36px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 24px;
+        }
+        .darg-drop-file-label {
+            display:block !important;
+            border: 2px dashed #1d43ec;
+            padding: 36px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="app">
+        <div class="container my-5">
+            <div class="form-group position-relative">
+            
+                <input type="file" id="file" class="darg-drop-file-input" @change="attachFile">
+            <label for="file" id="file_label" class="darg-drop-file-label" v-html="file_label"></label>
+            </div>
+        </div>
+      </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/196100b4ad.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                file: '',
+                file_label: 'File Upload',
+            },
+            methods: {
+                attachFile() {
+                    let file = document.getElementById('file');
+                    this.file = file.files[0];
+                    
+                    var extension = this.file.name.split('.')[1];
+                    var icon = '';
+                    switch(extension) {
+                        case 'zip':
+                            icon = '<i class="fas fa-file-archive mr-1" style="color:#000000;"></i>';
+                            break;
+                        case 'csv':
+                            icon = '<i class="fas fa-file-csv mr-1" style="color:#96C3F7;"></i>';
+                            break;
+                        case 'xls':
+                        case 'xlsx':
+                            icon = '<i class="fas fa-file-excel mr-1" style="color:#217346;"></i>';
+                            break;
+                        case 'png': 
+                        case 'PNG':
+                        case 'jpeg': 
+                        case 'JPEG':
+                        case 'jpg': 
+                        case 'JPG':
+                            icon = '<i class="fas fa-file-image mr-1" style="color:#9656B0;"></i>';
+                            break;
+                        case 'pdf':
+                            icon = '<i class="fas fa-file-pdf mr-1" style="color:#CB0F0B;"></i>';
+                            break;
+                        case 'ppt':
+                        case 'pptx':
+                            icon = '<i class="fas fa-file-powerpoint mr-1" style="color:#B53317;"></i>';
+                            break;
+                        case 'doc':
+                        case 'docx':
+                            icon = '<i class="fas fa-file-word mr-1" style="color:#285192;"></i>';
+                            break;
+                        default:
+                        icon = '<i class="far fa-file mr-1" style="color:#000000;"></i>';
+                    }
+                    this.file_label = icon + this.file.name;
+                }
+            },
+        })
+    </script>
+  </body>
+</html>
+
